@@ -30,7 +30,7 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* BOTONES */
+    /* BOTONES INVISIBLES */
     .btn {
       position: absolute;
       left: 28%;
@@ -42,40 +42,6 @@
 
     .ubicacion { top: 59%; }
     .confirmar { top: 80%; }
-
-    /* BRILLO MEJORADO */
-    .glow {
-      border-radius: 25px;
-      animation: brillo 1.8s infinite;
-    }
-
-    @keyframes brillo {
-      0% {
-        box-shadow: 0 0 0 rgba(255,215,160,0);
-      }
-      50% {
-        box-shadow: 0 0 22px rgba(255,215,160,0.9);
-      }
-      100% {
-        box-shadow: 0 0 0 rgba(255,215,160,0);
-      }
-    }
-
-    /* BOTÓN MÚSICA */
-    .music-btn {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 200;
-      background: rgba(255,255,255,0.9);
-      color: #9c6b7b;
-      border: 1px solid #e3b5c4;
-      border-radius: 20px;
-      padding: 8px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    }
 
     /* POPUP */
     .popup-bg {
@@ -139,23 +105,21 @@
 
 <body>
 
-  <!-- AUDIO MÚSICA -->
+  <!-- 🎵 MÚSICA AUTOMÁTICA -->
   <audio id="musica" loop autoplay>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
-
-  <button class="music-btn" onclick="activarMusica()">♫ Activar música</button>
 
   <div class="wrap">
     <img src="invitacion.png" alt="Invitación Ashley XV">
 
     <!-- UBICACIÓN -->
-    <a class="btn ubicacion glow"
+    <a class="btn ubicacion"
        href="https://maps.app.goo.gl/vXV5YjBapW6pfaeD9"
        target="_blank"></a>
 
     <!-- CONFIRMAR -->
-    <div class="btn confirmar glow" onclick="abrirPopup()"></div>
+    <div class="btn confirmar" onclick="abrirPopup()"></div>
   </div>
 
   <!-- POPUP -->
@@ -172,11 +136,6 @@
   </div>
 
   <script>
-    function activarMusica() {
-      const audio = document.getElementById("musica");
-      audio.play();
-      document.querySelector(".music-btn").innerText = "♫ Música activada";
-    }
 
     function abrirPopup() {
       document.getElementById("popup").style.display = "flex";
@@ -193,6 +152,19 @@
     function noAsistire() {
       window.open("https://wa.me/4915561264387?text=Hola%20Ashley%20💖%0AQuiero%20agradecerte%20de%20corazón%20por%20tu%20invitación.%20Lamentablemente%20no%20podré%20asistir,%20pero%20te%20deseo%20una%20celebración%20hermosa%20y%20llena%20de%20momentos%20inolvidables%20✨", "_blank");
     }
+
+    // 🔥 ACTIVAR MÚSICA SI EL NAVEGADOR LA BLOQUEA
+    document.addEventListener("DOMContentLoaded", () => {
+      const audio = document.getElementById("musica");
+
+      const playAudio = () => {
+        audio.play().catch(() => {});
+        document.removeEventListener("click", playAudio);
+      };
+
+      document.addEventListener("click", playAudio);
+    });
+
   </script>
 
 </body>
