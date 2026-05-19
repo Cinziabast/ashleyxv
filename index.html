@@ -4,14 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mis XV Ashley</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      background: #f7dce5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      max-width: 420px;
+      cursor: pointer;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    img.animar {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+  </style>
 </head>
 
-<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background:#f7dce5;">
+<body>
 
-  <a href="invitacion.html">
-    <img src="sobre.png" style="width:100%; max-width:420px;">
-  </a>
+  <img src="sobre.png" id="sobre">
+
+  <script>
+    const sobre = document.getElementById("sobre");
+
+    sobre.addEventListener("click", () => {
+      sobre.classList.add("animar");
+
+      setTimeout(() => {
+        window.location.href = "invitacion.html";
+      }, 700);
+    });
+  </script>
 
 </body>
 </html>
