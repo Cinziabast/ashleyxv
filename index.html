@@ -20,35 +20,36 @@
       width: 100%;
       max-width: 420px;
       cursor: pointer;
-      transition: transform 0.8s ease, opacity 0.8s ease;
+      transition: transform 0.9s ease, opacity 0.9s ease;
       z-index: 2;
     }
 
     #sobre.animar {
-      transform: scale(1.15);
+      transform: scale(1.08);
       opacity: 0;
     }
 
-    /* PARTICULAS */
     .sparkle {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      background: gold;
-      border-radius: 50%;
-      box-shadow: 0 0 12px gold;
-      animation: glitterZoom 0.8s ease-out forwards;
+      color: #f6d57a;
+      font-size: 18px;
+      text-shadow: 0 0 8px #fff3b0;
+      animation: sparklePop 1s ease-out forwards;
       z-index: 5;
+      pointer-events: none;
     }
 
-    @keyframes glitterZoom {
-      from {
-        opacity: 1;
-        transform: scale(0.2);
-      }
-      to {
+    @keyframes sparklePop {
+      0% {
         opacity: 0;
-        transform: scale(4);
+        transform: scale(0.2) rotate(0deg);
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.8) rotate(180deg);
       }
     }
   </style>
@@ -62,21 +63,22 @@
     const sobre = document.getElementById("sobre");
 
     function crearGlitter() {
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 22; i++) {
         const sparkle = document.createElement("div");
         sparkle.className = "sparkle";
+        sparkle.innerHTML = "✦";
 
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
 
-        sparkle.style.left = (centerX + (Math.random() * 80 - 40)) + "px";
-        sparkle.style.top = (centerY + (Math.random() * 80 - 40)) + "px";
+        sparkle.style.left = (centerX + (Math.random() * 260 - 130)) + "px";
+        sparkle.style.top = (centerY + (Math.random() * 260 - 130)) + "px";
 
         document.body.appendChild(sparkle);
 
         setTimeout(() => {
           sparkle.remove();
-        }, 800);
+        }, 1000);
       }
     }
 
@@ -86,7 +88,7 @@
 
       setTimeout(() => {
         window.location.href = "invitacion.html";
-      }, 800);
+      }, 900);
     });
   </script>
 
