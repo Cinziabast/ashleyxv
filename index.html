@@ -20,7 +20,7 @@
       width: 100%;
       max-width: 420px;
       cursor: pointer;
-      transition: transform 0.8s ease, opacity 0.8s ease;
+      transition: transform 0.9s ease, opacity 0.9s ease;
       z-index: 2;
     }
 
@@ -29,6 +29,7 @@
       opacity: 0;
     }
 
+    /* ESTRELLITAS ELEGANTES */
     .sparkle {
       position: absolute;
       color: #f6d57a;
@@ -40,15 +41,24 @@
     }
 
     @keyframes sparklePop {
-      0% { opacity: 0; transform: scale(0.2); }
-      30% { opacity: 1; }
-      100% { opacity: 0; transform: scale(1.8); }
+      0% {
+        opacity: 0;
+        transform: scale(0.2);
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.8);
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- SONIDO VARITA -->
   <audio id="clickSound">
     <source src="click.mp3" type="audio/mpeg">
   </audio>
@@ -78,13 +88,30 @@
     }
 
     sobre.addEventListener("click", () => {
-      sonido.play();
-      crearGlitter();
-      sobre.classList.add("animar");
 
-      setTimeout(() => {
-        window.location.href = "invitacion.html";
-      }, 1200);
+      sonido.currentTime = 0;
+
+      sonido.play().then(() => {
+
+        crearGlitter();
+        sobre.classList.add("animar");
+
+        setTimeout(() => {
+          window.location.href = "invitacion.html";
+        }, 1000);
+
+      }).catch(() => {
+        console.log("Audio bloqueado por el navegador");
+        
+        // Aun así continúa animación
+        crearGlitter();
+        sobre.classList.add("animar");
+
+        setTimeout(() => {
+          window.location.href = "invitacion.html";
+        }, 1000);
+      });
+
     });
   </script>
 
