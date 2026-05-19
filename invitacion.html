@@ -26,32 +26,11 @@
     }
 
     @keyframes entrada {
-      from {
-        opacity: 0;
-        transform: scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    .music-btn {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
-      color: #9c6b2f;
-      border: 1px solid #d8b36a;
-      border-radius: 20px;
-      padding: 8px 14px;
-      font-size: 14px;
-      font-family: Arial, sans-serif;
-      cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    }
-
+    /* BOTONES INVISIBLES */
     .btn {
       position: absolute;
       left: 28%;
@@ -60,41 +39,124 @@
       z-index: 10;
     }
 
-    .ubicacion {
-      top: 59%;
+    .ubicacion { top: 59%; }
+    .confirmar { top: 80%; }
+
+    /* POPUP */
+    .popup-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
     }
 
-    .confirmar {
-      top: 80%;
+    .popup {
+      background: linear-gradient(180deg, #ffe4ec, #ffd6e7);
+      border: 2px solid #e7b3c5;
+      border-radius: 20px;
+      padding: 25px 20px;
+      width: 85%;
+      max-width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: aparecer 0.4s ease;
     }
+
+    @keyframes aparecer {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup h2 {
+      font-family: serif;
+      color: #a06a7d;
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 14px;
+      color: #7a4d5d;
+      margin-bottom: 20px;
+    }
+
+    .popup button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .si {
+      background: #c08a9e;
+      color: white;
+    }
+
+    .no {
+      background: #e0a7b7;
+      color: white;
+    }
+
+    .cerrar {
+      background: transparent;
+      color: #a06a7d;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <audio id="musica" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-  </audio>
-
-  <button class="music-btn" onclick="activarMusica()">♫ Activar música</button>
-
   <div class="wrap">
     <img src="invitacion.png" alt="Invitación Ashley XV">
 
+    <!-- UBICACIÓN -->
     <a class="btn ubicacion"
        href="https://maps.app.goo.gl/vXV5YjBapW6pfaeD9"
        target="_blank"></a>
 
-    <a class="btn confirmar"
-       href="https://wa.me/4915561264387?text=Hola%20Ashley%20%F0%9F%91%8B%0ACon%20mucho%20gusto%20confirmo%20mi%20asistencia%20a%20tus%20XV%20%F0%9F%92%96"
-       target="_blank"></a>
+    <!-- CONFIRMAR -->
+    <div class="btn confirmar" onclick="abrirPopup()"></div>
+  </div>
+
+  <!-- POPUP -->
+  <div class="popup-bg" id="popup">
+    <div class="popup">
+      <h2>Confirmar asistencia 💖</h2>
+      <p>Tu presencia hará este día aún más especial</p>
+
+      <button class="si" onclick="asistire()">Sí asistiré ✨</button>
+      <button class="no" onclick="noAsistire()">No podré asistir 💌</button>
+
+      <button class="cerrar" onclick="cerrarPopup()">Cerrar</button>
+    </div>
   </div>
 
   <script>
-    function activarMusica() {
-      const musica = document.getElementById("musica");
-      musica.play();
-      document.querySelector(".music-btn").innerText = "♫ Música activada";
+    function abrirPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function cerrarPopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function asistire() {
+      window.open("https://wa.me/4915561264387?text=Hola%20Ashley%20💖%0ACon%20muchísima%20ilusión%20te%20confirmo%20que%20asistiré%20a%20tus%20XV.%20Será%20un%20honor%20acompañarte%20en%20un%20día%20tan%20especial%20✨", "_blank");
+    }
+
+    function noAsistire() {
+      window.open("https://wa.me/4915561264387?text=Hola%20Ashley%20💖%0AQuiero%20agradecerte%20de%20corazón%20por%20tu%20invitación.%20Lamentablemente%20no%20podré%20asistir,%20pero%20te%20deseo%20una%20celebración%20hermosa%20y%20llena%20de%20momentos%20inolvidables%20✨", "_blank");
     }
   </script>
 
