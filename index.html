@@ -20,7 +20,7 @@
       width: 100%;
       max-width: 420px;
       cursor: pointer;
-      transition: transform 0.9s ease, opacity 0.9s ease;
+      transition: transform 0.8s ease, opacity 0.8s ease;
       z-index: 2;
     }
 
@@ -40,30 +40,27 @@
     }
 
     @keyframes sparklePop {
-      0% {
-        opacity: 0;
-        transform: scale(0.2) rotate(0deg);
-      }
-      30% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.8) rotate(180deg);
-      }
+      0% { opacity: 0; transform: scale(0.2); }
+      30% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.8); }
     }
   </style>
 </head>
 
 <body>
 
+  <audio id="clickSound">
+    <source src="click.mp3" type="audio/mpeg">
+  </audio>
+
   <img src="sobre.png" id="sobre">
 
   <script>
     const sobre = document.getElementById("sobre");
+    const sonido = document.getElementById("clickSound");
 
     function crearGlitter() {
-      for (let i = 0; i < 22; i++) {
+      for (let i = 0; i < 20; i++) {
         const sparkle = document.createElement("div");
         sparkle.className = "sparkle";
         sparkle.innerHTML = "✦";
@@ -71,24 +68,23 @@
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
 
-        sparkle.style.left = (centerX + (Math.random() * 260 - 130)) + "px";
-        sparkle.style.top = (centerY + (Math.random() * 260 - 130)) + "px";
+        sparkle.style.left = (centerX + (Math.random() * 200 - 100)) + "px";
+        sparkle.style.top = (centerY + (Math.random() * 200 - 100)) + "px";
 
         document.body.appendChild(sparkle);
 
-        setTimeout(() => {
-          sparkle.remove();
-        }, 1000);
+        setTimeout(() => sparkle.remove(), 1000);
       }
     }
 
     sobre.addEventListener("click", () => {
+      sonido.play();
       crearGlitter();
       sobre.classList.add("animar");
 
       setTimeout(() => {
         window.location.href = "invitacion.html";
-      }, 900);
+      }, 800);
     });
   </script>
 
